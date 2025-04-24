@@ -1,0 +1,38 @@
+<template data-controller-name="com.innovatec.REG_SUPPLIERS.controller.Login">
+  <!--<div id="app" data-sap-ui-type="sap.m.App">-->
+  <div id="page" data-sap-ui-type="sap.m.Page" data-title="Title" data-show-header="false" data-show-footer="false"
+    data-enable-scrolling="false">
+    <div data-sap-ui-aggregation="content">
+      <div class="form-box">
+        <div class="form-value">
+          <img class="img-logo" alt="logo">
+          <form action="">
+            <div class="inputbox">
+              <ion-icon name="mail-outline"></ion-icon>
+              <input type="text" required>
+              <label for="">Username</label>
+            </div>
+            <div class="inputbox">
+              <ion-icon name="lock-closed-outline"></ion-icon>
+              <input type="password" required>
+              <label for="">Password</label>
+            </div>
+            <!--<div class="forget">-->
+            <!--  <label><input type="checkbox">Remember Me</label>-->
+            <!--  <a href="#">Forgot password?</a>-->
+            <!--</div>-->
+            <div data-sap-ui-type="sap.m.Button" data-text="Registrarse"  id="registerBtn">
+            </div>
+
+
+            <div class="register">
+              <p>¿Nuevo proveedor? <div data-sap-ui-type="sap.m.Link" data-text="Regístrate" data-press="onRegister" id="registerLink"></div>
+</p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--</div>-->
+</template>
