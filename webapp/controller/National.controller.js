@@ -12,7 +12,6 @@ sap.ui.define([
 			this._wizard = this.byId("CreateProductWizard");
 			this._oNavContainer = this.byId("wizardNavContainer");
 			this._oWizardContentPage = this.byId("wizardContentPage");
-
 			this.model = new JSONModel();
 			this.model.setData({
 				productNameState: "Error",
