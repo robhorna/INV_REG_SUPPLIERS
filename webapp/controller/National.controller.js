@@ -9,6 +9,10 @@ sap.ui.define([
 	return BaseController.extend("com.innovatec.REG_SUPPLIERS.controller.National", {
 		onInit: function () {
 			this.getRouter().getRoute("National").attachPatternMatched(this._onObjectMatched, this);
+			// Simula un modelo simple para pruebas
+			this.getView().setModel(new sap.ui.model.json.JSONModel({
+				nombre: ""
+			}));
 			this._wizard = this.byId("CreateProductWizard");
 			this._oNavContainer = this.byId("wizardNavContainer");
 			this._oWizardContentPage = this.byId("wizardContentPage");
@@ -30,6 +34,16 @@ sap.ui.define([
 			this._setEmptyValue("/manufacturingDate");
 			this._setEmptyValue("/discountGroup");
 
+		},
+		onLiveChange: function (oEvent) {
+			var sValue = oEvent.getParameter("value");
+			var oLabel = this.byId("nombreLabel");
+
+			if (sValue) {
+				oLabel.addStyleClass("labelFloating");
+			} else {
+				oLabel.removeStyleClass("labelFloating");
+			}
 		},
 		_onObjectMatched: function () {
 			const oView = this.getView();
@@ -68,28 +82,28 @@ sap.ui.define([
 		},
 
 		additionalInfoValidation: function () {
-			var name = this.byId("ProductName").getValue();
-			var weight = parseInt(this.byId("ProductWeight").getValue());
+// 			var name = this.byId("ProductName").getValue();
+// 			var weight = parseInt(this.byId("ProductWeight").getValue());
 
-			if (isNaN(weight)) {
-				this._wizard.setCurrentStep(this.byId("ProductInfoStep"));
-				this.model.setProperty("/productWeightState", "Error");
-			} else {
-				this.model.setProperty("/productWeightState", "None");
-			}
+// 			if (isNaN(weight)) {
+// 				this._wizard.setCurrentStep(this.byId("ProductInfoStep"));
+// 				this.model.setProperty("/productWeightState", "Error");
+// 			} else {
+// 				this.model.setProperty("/productWeightState", "None");
+// 			}
 
-			if (name.length < 6) {
-				this._wizard.setCurrentStep(this.byId("ProductInfoStep"));
-				this.model.setProperty("/productNameState", "Error");
-			} else {
-				this.model.setProperty("/productNameState", "None");
-			}
+// 			if (name.length < 6) {
+// 				this._wizard.setCurrentStep(this.byId("ProductInfoStep"));
+// 				this.model.setProperty("/productNameState", "Error");
+// 			} else {
+// 				this.model.setProperty("/productNameState", "None");
+// 			}
 
-			if (name.length < 6 || isNaN(weight)) {
-				this._wizard.invalidateStep(this.byId("ProductInfoStep"));
-			} else {
-				this._wizard.validateStep(this.byId("ProductInfoStep"));
-			}
+// 			if (name.length < 6 || isNaN(weight)) {
+// 				this._wizard.invalidateStep(this.byId("ProductInfoStep"));
+// 			} else {
+// 				this._wizard.validateStep(this.byId("ProductInfoStep"));
+// 			}
 		},
 
 		optionalStepActivation: function () {

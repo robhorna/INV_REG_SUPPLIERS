@@ -1,51 +1,102 @@
-<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:form="sap.ui.layout.form" 	xmlns:u="sap.ui.unified"
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:form="sap.ui.layout.form" xmlns:u="sap.ui.unified"
 	controllerName="com.innovatec.REG_SUPPLIERS.controller.National" xmlns:html="http://www.w3.org/1999/xhtml">
 	<NavContainer id="wizardNavContainer">
 		<pages>
-			<Page id="wizardContentPage" showHeader="false">
+			<Page title="Registro de Proveedores" showNavButton="true" navButtonPress="onNavBack" enableScrolling="false" class="wizardPage">
 				<content>
-					<Wizard id="CreateProductWizard" class="sapUiResponsivePadding--header sapUiResponsivePadding--content" complete="wizardCompletedHandler">
-						<WizardStep id="ProductTypeStep" title="Product Type" validated="true">
-							<MessageStrip class="sapUiSmallMarginBottom"
-								text="The Wizard control is supposed to break down large tasks, into smaller steps, easier for the user to work with." showIcon="true"/>
-							<Text class="sapUiSmallMarginBottom"
-								text="Sed fermentum, mi et tristique ullamcorper, sapien sapien faucibus sem, quis pretium nibh lorem malesuada diam. Nulla quis arcu aliquet, feugiat massa semper, volutpat diam. Nam vitae ante posuere, molestie neque sit amet, dapibus velit. Maecenas eleifend tempor lorem. Mauris vitae elementum mi, sed eleifend ligula. Nulla tempor vulputate dolor, nec dignissim quam convallis ut. Praesent vitae commodo felis, ut iaculis felis. Fusce quis eleifend sapien, eget facilisis nibh. Suspendisse est velit, scelerisque ut commodo eget, dignissim quis metus. Cras faucibus consequat gravida. Curabitur vitae quam felis. Phasellus ac leo eleifend, commodo tortor et, varius quam. Aliquam erat volutpat"/>
-							<HBox alignItems="Center" justifyContent="Center" width="100%">
-								<SegmentedButton width="320px" selectionChange="setProductTypeFromSegmented">
+					<Wizard id="CreateProductWizard" width="100%" class="sapUiResponsivePadding--header sapUiResponsivePadding--content"
+						complete="wizardCompletedHandler" renderMode="Page" showNextButton="true">
+						<WizardStep id="ProductTypeStep" title="Datos generales" validated="true">
+							<VBox class="sapUiSmallMargin">
+								<Input id="nameInput" placeholder="Razón social"/>
+								<VBox>
+									<Label text="Concepto de búsqueda"/>
+									<HBox>
+										<Select id="idTypeSelect">
+											<items>
+												<core:Item key="1" text="RUC"/>
+												<core:Item key="2" text="RFC"/>
+												<core:Item key="3" text="RUT"/>
+											</items>
+										</Select>
+										<Input id="Stcd1Input" placeholder="Concepto de búsqueda"/>
+									</HBox>
+								</VBox>
+								<Input id="iptName1" placeholder="Nombre de compañía" type="Text"/>
+								<Label text="Tipo de Proveedor"/>
+								<Select id="supplierTypeSelect">
 									<items>
-										<SegmentedButtonItem icon="sap-icon://iphone" text="Mobile"/>
-										<SegmentedButtonItem icon="sap-icon://sys-monitor" text="Desktop"/>
-										<SegmentedButtonItem icon="sap-icon://database" text="Other"/>
+										<core:Item key="1" text="Nacional"/>
+										<core:Item key="2" text="Extranjero"/>
 									</items>
-								</SegmentedButton>
-							</HBox>
-						</WizardStep>
-						<WizardStep id="ProductInfoStep" validated="false" title="Product Information" activate="additionalInfoValidation">
-							<MessageStrip class="sapUiSmallMarginBottom"
-								text="Validation in the wizard is controlled by calling the validateStep(Step) and invalidateStep(Step) methods " showIcon="true"/>
-							<Text
-								text="Cras tellus leo, volutpat vitae ullamcorper eu, posuere malesuada nisl. Integer pellentesque leo sit amet dui vehicula, quis ullamcorper est pulvinar. Nam in libero sem. Suspendisse arcu metus, molestie a turpis a, molestie aliquet dui. Donec pulvinar, sapien et viverra imperdiet, orci erat porttitor nulla, eget commodo metus nibh nec ipsum. Aliquam lacinia euismod metus, sollicitudin pellentesque purus volutpat eget. Pellentesque egestas erat quis eros convallis mattis. Mauris hendrerit sapien a malesu corper eu, posuere malesuada nisl. Integer pellentesque leo sit amet dui vehicula, quis ullamcorper est pulvinar. Nam in libero sem. Suspendisse arcu metus, molestie a turpis a, molestie aliquet dui. Donec pulvinar, sapien corper eu, posuere malesuada nisl. Integer pellentesque leo sit amet dui vehicula, quis ullamcorper est pulvinar. Nam in libero sem. Suspendisse arcu metus, molestie a turpis a, molestie aliquet dui. Donec pulvinar, sapien "/>
-							<form:SimpleForm editable="true" layout="ResponsiveGridLayout">
-								<Label text="Name" required="true"/>
-								<Input valueStateText="Enter 6 symbols or more" valueState="{/productNameState}" id="ProductName" liveChange="additionalInfoValidation"
-									placeholder="Enter name with length greater than 6" value="{/productName}"/>
-								<Label text="Weight" required="true"/>
-								<Input valueStateText="Enter digits" valueState="{/productWeightState}" id="ProductWeight" liveChange="additionalInfoValidation"
-									type="Number" placeholder="Enter digits" value="{/productWeight}"/>
-								<Label text="Manufacturer"/>
-								<Select selectedKey="{/productManufacturer}">
-									<core:Item key="Apple" text="Apple"/>
-									<core:Item key="Microsoft" text="Microsoft"/>
-									<core:Item key="Google" text="Google"/>
-									<core:Item key="Sony" text="Sony"/>
-									<core:Item key="Samsung" text="Samsung"/>
-									<core:Item key="Logitech" text="Logitech"/>
 								</Select>
-								<Label text="Description"/>
-								<TextArea value="{/productDescription}" rows="8"/>
-							</form:SimpleForm>
+								<SegmentedButton width="auto" selectionChange="setProductTypeFromSegmented">
+									<items></items>
+								</SegmentedButton>
+							</VBox>
+							<!--</HBox>-->
 						</WizardStep>
-						<WizardStep id="OptionalInfoStep" validated="true" activate="optionalStepActivation" title="Optional Information">
+						<WizardStep id="ProductInfoStep" validated="false" title="Dirección" activate="additionalInfoValidation">
+							<form:SimpleForm id="SimpleFormChangeColumn_oneGroup234" editable="true" layout="ResponsiveGridLayout" title="Address" columnsM="2"
+								columnsL="3" columnsXL="4" labelSpanM="4" columnsS="1" labelSpanL="3" labelSpanXL="2" emptySpanM="0" emptySpanL="0" emptySpanXL="0"
+								singleContainerFullSize="false">
+								<!-- Fila 1 -->
+								<Label text="Name"/>
+								<Input id="name" value="{SupplierName}"/>
+								<!-- Fila 2 -->
+								<Label text="Street/No."/>
+								<HBox>
+									<Input value="{Street}" width="70%" class="sapUiSmallMarginEnd"/>
+									<Input value="{HouseNumber}" width="30%"/>
+								</HBox>
+								<!-- Fila 3 -->
+								<Label text="ZIP Code/City"/>
+								<HBox>
+									<Input value="{ZIPCode}" width="30%" class="sapUiSmallMarginEnd"/>
+									<Input value="{City}" width="70%"/>
+								</HBox>
+								<!-- Fila 4 - Ejemplo de cómo agregar más campos -->
+								<Label text="Country"/>
+								<Select selectedKey="{Country}">
+									<core:Item key="PE" text="Perú"/>
+									<core:Item key="CL" text="Chile"/>
+									<core:Item key="US" text="USA"/>
+								</Select>
+								<!-- Más filas según necesites -->
+							</form:SimpleForm>
+							<!--<form:SimpleForm editable="true" layout="ResponsiveGridLayout" columnsXL="2" columnsL="2" columnsM="1" columnsS="1">-->
+							<!--	<Label text="Name" required="true"/>-->
+							<!--	<Input valueStateText="Ingrese dirección válida" valueState="{/productNameState}" id="ProductName" liveChange="additionalInfoValidation"-->
+							<!--		placeholder="Dirección" value="{/productName}"/>-->
+							<!--	<Label text="Weight" required="true"/>-->
+							<!--	<Input valueStateText="Ingrese código postal válido" valueState="{/productWeightState}" id="ProductWeight"-->
+							<!--		liveChange="additionalInfoValidation" type="Number" placeholder="Código postal" value="{/productWeight}"/>-->
+							<!--	<Label text="País"/>-->
+							<!--	<Select selectedKey="{/productManufacturer}">-->
+							<!--		<core:Item key="Perú" text="Perú"/>-->
+							<!--		<core:Item key="Chile" text="Chile"/>-->
+							<!--		<core:Item key="Italia" text="Italia"/>-->
+							<!--		<core:Item key="USA" text="USA"/>-->
+							<!--	</Select>-->
+							<!--	<Label text="Región"/>-->
+							<!--	<Select selectedKey="{/productManufacturer}">-->
+							<!--		<core:Item key="Perú" text="Perú"/>-->
+							<!--		<core:Item key="Chile" text="Chile"/>-->
+							<!--		<core:Item key="Italia" text="Italia"/>-->
+							<!--		<core:Item key="USA" text="USA"/>-->
+							<!--	</Select>-->
+							<!--	<Label text="Distrito"/>-->
+							<!--	<Select selectedKey="{/productManufacturer}">-->
+							<!--		<core:Item key="Perú" text="Perú"/>-->
+							<!--		<core:Item key="Chile" text="Chile"/>-->
+							<!--		<core:Item key="Italia" text="Italia"/>-->
+							<!--		<core:Item key="USA" text="USA"/>-->
+							<!--	</Select>-->
+							<!--	<Label text="Teléfono"/>-->
+							<!--	<Input valueStateText="Ingrese teléfono válido" liveChange="additionalInfoValidation" type="Number" placeholder="Teléfono" value="{/test}"/>-->
+							<!--</form:SimpleForm>-->
+						</WizardStep>
+						<WizardStep id="OptionalInfoStep" validated="true" activate="optionalStepActivation" title="Contacto">
 							<MessageStrip class="sapUiSmallMarginBottom"
 								text="You can validate steps by default with the validated='true' property of the step. The next button is always enabled." showIcon="true"/>
 							<Text
@@ -74,7 +125,7 @@
 								</ComboBox>
 							</form:SimpleForm>
 						</WizardStep>
-						<WizardStep id="PricingStep" activate="pricingActivate" complete="pricingComplete" validated="true" title="Pricing">
+						<WizardStep id="PricingStep" activate="pricingActivate" complete="pricingComplete" validated="true" title="Datos de contabilidad">
 							<MessageStrip class="sapUiSmallMarginBottom"
 								text="You can use the wizard previousStep() and nextStep() methods to navigate from step to step without validation. Also you can use the GoToStep(step) method to scroll programmatically to previously visited steps."
 								showIcon="true"/>
@@ -94,12 +145,12 @@
 						</WizardStep>
 					</Wizard>
 				</content>
-				<footer>
-					<OverflowToolbar>
-						<ToolbarSpacer/>
-						<Button text="Cancel" press="handleWizardCancel"/>
-					</OverflowToolbar>
-				</footer>
+				<!--<footer>-->
+				<!--	<OverflowToolbar>-->
+				<!--		<ToolbarSpacer/>-->
+				<!--		<Button text="Cancel" press="handleWizardCancel"/>-->
+				<!--	</OverflowToolbar>-->
+				<!--</footer>-->
 			</Page>
 			<Page id="wizardReviewPage" showHeader="false">
 				<content>
@@ -151,14 +202,6 @@
 						</form:content>
 					</form:SimpleForm>
 				</content>
-				<footer>
-					<Bar>
-						<contentRight>
-							<Button text="Submit" press="handleWizardSubmit"/>
-							<Button text="Cancel" press="handleWizardCancel"/>
-						</contentRight>
-					</Bar>
-				</footer>
 			</Page>
 		</pages>
 	</NavContainer>
